@@ -3,6 +3,7 @@ package com.teamsparta.courseregistration.domain.course.service
 import com.teamsparta.courseregistration.domain.course.dto.CourseResponse
 import com.teamsparta.courseregistration.domain.course.dto.CreateCourseRequest
 import com.teamsparta.courseregistration.domain.course.dto.UpdateCourseRequest
+import com.teamsparta.courseregistration.domain.exception.ModelNotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -19,7 +20,8 @@ class CourseServiceImpl: CourseService {
     override fun getCourseById(courseId: Long): CourseResponse {
         // TODO: 만약 courseId에 해당하는 Course가 없다면 throw ModelNotFoundException
         // TODO: DB에서 ID 기반으로 Course 가져와서 CourseResponse로 변환 후 반환
-        TODO("Not yet implemented")
+//        TODO("Not yet implemented")
+        throw ModelNotFoundException("Course", 1L)
     }
 
     @Transactional

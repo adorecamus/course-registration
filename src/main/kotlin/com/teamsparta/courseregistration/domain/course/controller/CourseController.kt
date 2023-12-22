@@ -4,9 +4,11 @@ import com.teamsparta.courseregistration.domain.course.dto.CourseResponse
 import com.teamsparta.courseregistration.domain.course.dto.CreateCourseRequest
 import com.teamsparta.courseregistration.domain.course.dto.UpdateCourseRequest
 import com.teamsparta.courseregistration.domain.course.service.CourseService
+import com.teamsparta.courseregistration.domain.exception.ModelNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -70,4 +72,13 @@ class CourseController(
             .status(HttpStatus.NO_CONTENT)
             .build() // body가 없을 경우
     }
+
+//    @ExceptionHandler(ModelNotFoundException::class)
+//    fun handleModelNotFoundException(e: ModelNotFoundException): ResponseEntity<Unit> {
+//        return ResponseEntity
+//            .status(HttpStatus.NOT_FOUND)
+//            .build()
+//    }
+    // ModelNotFoundException이 다른 Controller에서도 쓰인다면 각각의 Controller에서 해당 코드를 작성해야 함
+    // Exception을 전역적으로 처리할 수 있는 @ControllerAdvice @RestControllerAdvice를 대신 사용
 }
