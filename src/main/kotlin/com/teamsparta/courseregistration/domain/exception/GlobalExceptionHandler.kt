@@ -15,4 +15,11 @@ class GlobalExceptionHandler {
             .status(HttpStatus.NOT_FOUND)
             .body(ErrorResponse(message = e.message))
     }
+
+    @ExceptionHandler(IllegalStateException::class)
+    fun hanleIllegalStateException(e: IllegalStateException): ResponseEntity<ErrorResponse> {
+        return ResponseEntity
+            .status(HttpStatus.CONFLICT)    // 409 상태코드. 선택의 문제임.
+            .body(ErrorResponse(e.message))
+    }
 }
