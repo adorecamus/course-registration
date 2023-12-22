@@ -28,7 +28,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")   // swagger
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa") // DB (Transactional 사용)
+    implementation("com.h2database:h2") // 자바로 작성된 DBMS. 별도 설치 없이 Spring 뜰 때 같이 뜸. 테스트 용으로 자주 씀.
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
