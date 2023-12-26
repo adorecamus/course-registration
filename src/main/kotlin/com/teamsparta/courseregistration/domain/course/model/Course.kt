@@ -1,5 +1,6 @@
 package com.teamsparta.courseregistration.domain.course.model
 
+import com.teamsparta.courseregistration.domain.course.dto.CourseResponse
 import com.teamsparta.courseregistration.domain.courseapplication.model.CourseApplication
 import com.teamsparta.courseregistration.domain.lecture.model.Lecture
 import jakarta.persistence.*
@@ -28,7 +29,7 @@ class Course(
     val maxApplicants: Int = 30,
 
     @Column(name = "num_applicants")
-    val numApplicants: Int = 0,
+    var numApplicants: Int = 0,
 
     @OneToMany(mappedBy = "course",     // 양방향관계에서 연관관계의 주인(FK 소유)이 아닌 쪽에 mappedBy 명시
         fetch = FetchType.LAZY,         // 지연 로딩 LAZY, 즉시 로딩 EAGER - 성능 향상 위해 기본적으로 LAZY로 설정
@@ -46,4 +47,45 @@ class Course(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // DB에 자동 생성 위임
     var id: Long? = null // DB에 위임하기 때문에 nullable 로 설정
+
+    // 도메인 로직들을 Entity 내부에 정의함
+    fun isFull(): Boolean {
+        return numApplicants >= maxApplicants
+    }
+
+    fun isClosed(): Boolean {
+        return status == CourseStatus.CLOSED
+    }
+
+    fun close() {
+        status = CourseStatus.CLOSED
+    }
+
+    fun addApplicant() {
+        numApplicants += 1
+    }
+
+    fun addLecture(lecture: Lecture) {
+        lectures.add(lecture)
+    }
+
+    fun removeLecture(lecture: Lecture) {
+        lectures.remove(lecture)
+    }
+
+    fun addCourseApplication(courseApplication: CourseApplication) {
+        courseApplications.add(courseApplication)
+    }
+}
+
+// Entity를 Response로 변환하는 것은 Model이 가지는 필수적인 도메인 로직이 아니므로 멤버 함수 대신 extension function 활용
+fun Course.toResponse(): CourseResponse {
+    return CourseResponse(
+        id = id!!,
+        title = title,
+        description = description,
+        status = status.name,
+        maxApplicants = maxApplicants,
+        numApplicants = numApplicants
+    )
 }
