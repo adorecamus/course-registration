@@ -1,6 +1,5 @@
 package com.teamsparta.courseregistration.domain.user.controller
 
-import com.teamsparta.courseregistration.domain.user.dto.ProfileResponse
 import com.teamsparta.courseregistration.domain.user.dto.SignUpRequest
 import com.teamsparta.courseregistration.domain.user.dto.UpdateUserProfileRequest
 import com.teamsparta.courseregistration.domain.user.dto.UserResponse
@@ -29,7 +28,7 @@ class UserController(
     fun updateUserProfile(
         @PathVariable userId: Long,
         @RequestBody updateUserProfileRequest: UpdateUserProfileRequest
-    ): ResponseEntity<ProfileResponse> {
+    ): ResponseEntity<UserResponse> {
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(userService.updateUserProfile(userId, updateUserProfileRequest))

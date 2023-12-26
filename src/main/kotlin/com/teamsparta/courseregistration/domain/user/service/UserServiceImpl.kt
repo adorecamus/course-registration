@@ -1,7 +1,6 @@
 package com.teamsparta.courseregistration.domain.user.service
 
 import com.teamsparta.courseregistration.domain.exception.ModelNotFoundException
-import com.teamsparta.courseregistration.domain.user.dto.ProfileResponse
 import com.teamsparta.courseregistration.domain.user.dto.SignUpRequest
 import com.teamsparta.courseregistration.domain.user.dto.UpdateUserProfileRequest
 import com.teamsparta.courseregistration.domain.user.dto.UserResponse
